@@ -1,0 +1,69 @@
+{
+  "version": "1.0.0",
+  "service": "SupportIQ-Ecommerce-Agent",
+  "governance_engine": "Swytchcode Controlled Execution Kernel",
+  "policies": [
+    {
+      "tool": "get_order_status",
+      "description": "Fetch real-time fulfillment and shipping status for a customer order.",
+      "allowed": true,
+      "requires_auth": true,
+      "validation": {
+        "order_id": "^(48291|10244|55912|78201|[0-9]{5})$"
+      },
+      "rate_limit": "60/min",
+      "risk_level": "LOW"
+    },
+    {
+      "tool": "get_customer_details",
+      "description": "Retrieve customer account profile, loyalty status, and past orders.",
+      "allowed": true,
+      "requires_auth": true,
+      "validation": {
+        "customer_id": "^(CUST-[0-9]{3,5}|cust_[a-z0-9]+)$"
+      },
+      "rate_limit": "30/min",
+      "risk_level": "LOW"
+    },
+    {
+      "tool": "create_support_ticket",
+      "description": "Open a new high-priority escalation ticket for human support agents.",
+      "allowed": true,
+      "requires_auth": false,
+      "validation": {
+        "priority": "^(LOW|MEDIUM|HIGH|URGENT)$"
+      },
+      "rate_limit": "20/min",
+      "risk_level": "MEDIUM"
+    },
+    {
+      "tool": "request_refund",
+      "description": "Process a customer refund request for returned or damaged items.",
+      "allowed": true,
+      "requires_auth": true,
+      "validation": {
+        "amount": "^[0-9]+(\\.[0-9]{1,2})?$"
+      },
+      "human_approval_rules": {
+        "amount_gt": 100.0,
+        "reason_contains": ["damaged", "stolen", "defective", "missing"]
+      },
+      "rate_limit": "5/min",
+      "risk_level": "HIGH"
+    },
+    {
+      "tool": "cancel_order",
+      "description": "Cancel an unfulfilled order before shipment.",
+      "allowed": true,
+      "requires_auth": true,
+      "validation": {
+        "order_id": "^[0-9]{5}$"
+      },
+      "human_approval_rules": {
+        "status_must_be": "PROCESSING"
+      },
+      "rate_limit": "10/min",
+      "risk_level": "MEDIUM"
+    }
+  ]
+}

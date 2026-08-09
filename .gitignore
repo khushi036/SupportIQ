@@ -1,0 +1,56 @@
+# ─────────────────────────────────────────
+# Python
+# ─────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.env
+.env.*
+!.env.example
+*.egg-info/
+dist/
+build/
+*.egg
+.mypy_cache/
+.pytest_cache/
+*.log
+
+# ─────────────────────────────────────────
+# Node / React / Vite
+# ─────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.local
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─────────────────────────────────────────
+# Vector DB / ChromaDB
+# ─────────────────────────────────────────
+chroma_db/
+*.sqlite3
+*.db
+
+# ─────────────────────────────────────────
+# IDE / Editor
+# ─────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ─────────────────────────────────────────
+# OS
+# ─────────────────────────────────────────
+desktop.ini
